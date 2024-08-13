@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Slideshow</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        #surpriseButton {
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            background-color: #61dafb;
+            color: #282c34;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #surpriseButton:hover {
+            background-color: #21a1f1;
+        }
+
+        #slideshow {
+            display: none;
+            text-align: center;
+        }
+
+        #slideshow img {
+            max-width: 100%;
+            max-height: 100%;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="surpriseContainer">
+        <button id="surpriseButton">Surprise!</button>
+    </div>
+
+    <div id="slideshow">
+        <img id="slideshowImage" src="" alt="Slideshow Image">
+    </div>
+
+    <audio id="voiceRecording" src="your-voice-recording.mp3"></audio>
+
+    <script>
+        const images = [
+            'image1.jpg',
+            'image2.jpg',
+            'image3.jpg',
+            'image4.jpg'
+        ];
+
+        let currentImageIndex = 0;
+        const surpriseButton = document.getElementById('surpriseButton');
+        const slideshow = document.getElementById('slideshow');
+        const slideshowImage = document.getElementById('slideshowImage');
+        const voiceRecording = document.getElementById('voiceRecording');
+
+        surpriseButton.addEventListener('click', function () {
+            surpriseButton.style.display = 'none';
+            slideshow.style.display = 'block';
+            voiceRecording.play();
+            showNextImage();
+        });
+
+        function showNextImage() {
+            slideshowImage.src = images[currentImageIndex];
+            currentImageIndex++;
+            if (currentImageIndex < images.length) {
+                setTimeout(showNextImage, 3000); // Change image every 3 seconds
+            }
+        }
+    </script>
+</body>
+
+</html>
